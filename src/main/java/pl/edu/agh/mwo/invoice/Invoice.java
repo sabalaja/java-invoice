@@ -9,15 +9,13 @@ public class Invoice {
     private HashMap<Product, Integer> products = new HashMap<Product, Integer>();
 
     public void addProduct(Product product) {
-        if (product == null) {
-            throw new IllegalArgumentException("Product cannot be null");
-        } else {
-            products.put(product, 1);
-        }
+        addProduct(product, 1);
     }
 
     public void addProduct(Product product, Integer quantity) {
-        if (quantity<=0) {
+        if (product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        } else if (quantity<=0) {
             throw new IllegalArgumentException("Quantity cannot be less than 0");
         } else {
             products.put(product, quantity);
@@ -47,7 +45,6 @@ public class Invoice {
     public BigDecimal getTotal() {
         BigDecimal total = BigDecimal.ZERO;
         if (this.products != null) {
-            System.out.println(getSubtotal());
             total = getSubtotal().add(getTax());
         }
         return total;
