@@ -7,9 +7,6 @@ import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
     private HashMap<Product, Integer> products = new HashMap<Product, Integer>();
-    private BigDecimal subTotal = BigDecimal.ZERO;
-    private BigDecimal tax = BigDecimal.ZERO;
-    private BigDecimal total = BigDecimal.ZERO;
 
     public void addProduct(Product product) {
         if (product == null) {
@@ -28,6 +25,7 @@ public class Invoice {
     }
 
     public BigDecimal getSubtotal() {
+        BigDecimal subTotal = BigDecimal.ZERO;
         if (this.products != null) {
             for (Product product : products.keySet()) {
                 subTotal = subTotal.add(product.getPrice().multiply(BigDecimal.valueOf(products.get(product))));
@@ -37,6 +35,7 @@ public class Invoice {
     }
 
     public BigDecimal getTax() {
+        BigDecimal tax = BigDecimal.ZERO;
         if (this.products != null) {
             for (Product product : products.keySet()) {
                 tax = tax.add(product.getPrice().multiply(product.getTaxPercent().multiply(BigDecimal.valueOf(products.get(product)))));
@@ -46,10 +45,10 @@ public class Invoice {
     }
 
     public BigDecimal getTotal() {
+        BigDecimal total = BigDecimal.ZERO;
         if (this.products != null) {
-            for (Product product : products.keySet()) {
-                total = total.add(product.getPriceWithTax().multiply(BigDecimal.valueOf(products.get(product))));
-            }
+            System.out.println(getSubtotal());
+            total = getSubtotal().add(getTax());
         }
         return total;
     }
