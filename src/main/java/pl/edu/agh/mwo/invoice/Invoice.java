@@ -10,13 +10,14 @@ public class Invoice {
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
     public void addProduct(Product product) {
-        addProduct(product, 1);
+        if (product == null) throw new IllegalArgumentException("Product cannot be null");
+        products.put(product, 1);
     }
 
     public void addProduct(Product product, Integer quantity) {
-        if (product == null || quantity <= 0) {
-            throw new IllegalArgumentException();
-        }
+        if (quantity == 0) throw new IllegalArgumentException("Quantity cannot be zero");
+        if (quantity < 0) throw new IllegalArgumentException("Quantity cannot be negative");
+        if (product == null) throw new IllegalArgumentException("Product cannot be null");
         products.put(product, quantity);
     }
 
