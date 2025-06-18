@@ -42,9 +42,15 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        if (quantity == 0) throw new IllegalArgumentException("Quantity cannot be zero");
-        if (quantity < 0) throw new IllegalArgumentException("Quantity cannot be negative");
-        if (product == null) throw new IllegalArgumentException("Product cannot be null");
+        if (quantity == 0) {
+            throw new IllegalArgumentException("Quantity cannot be zero");
+        };
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        };
+        if (product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
+        };
         products.compute(product, (k, v) -> v == null ? quantity : v + quantity);
     }
 

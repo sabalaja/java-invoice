@@ -12,10 +12,18 @@ public abstract class Product {
     private final BigDecimal excise;
 
     protected Product(String name, BigDecimal price, BigDecimal tax, BigDecimal excise) {
-        if (name == null) throw new IllegalArgumentException("Product name cannot be null");
-        if (name.isEmpty()) throw new IllegalArgumentException("Product name cannot be empty");
-        if (price == null) throw new IllegalArgumentException("Product price cannot be null");
-        if (price.toString().charAt(0) == '-') throw new IllegalArgumentException("Product price cannot be negative");
+        if (name == null) {
+            throw new IllegalArgumentException("Product name cannot be null");
+        };
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException("Product name cannot be empty");
+        };
+        if (price == null) {
+            throw new IllegalArgumentException("Product price cannot be null");
+        };
+        if (price.toString().charAt(0) == '-') {
+            throw new IllegalArgumentException("Product price cannot be negative");
+        };
         this.name = name;
         this.price = price.add(excise);
         this.taxPercent = tax;
